@@ -6,6 +6,8 @@ import {signUpRouter} from './routes/signup';
 import {signInRouter} from './routes/signin';
 import {signOutRouter} from './routes/signout';
 
+import {errorHandler} from './middlewares/error-handlers';
+
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use("/api/users",currentUserRouter)
 app.use("/api/users",signUpRouter)
 app.use("/api/users",signInRouter)
 app.use("/api/users",signOutRouter)
+
+app.use(errorHandler) ;
 
 
 
