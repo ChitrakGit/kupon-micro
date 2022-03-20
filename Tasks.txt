@@ -1,3 +1,4 @@
 > run the skaffold file [ skaffold dev ]
 > edit the host file for ingress-nginx
 > check the test route
+> type "thisisunsafe" in browser window to see result
