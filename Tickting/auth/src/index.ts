@@ -7,6 +7,7 @@ import {signInRouter} from './routes/signin';
 import {signOutRouter} from './routes/signout';
 
 import {errorHandler} from './middlewares/error-handlers';
+import {NotFoundError} from './errors/not-found-error';
 
 
 
@@ -18,6 +19,10 @@ app.use("/api/users",currentUserRouter)
 app.use("/api/users",signUpRouter)
 app.use("/api/users",signInRouter)
 app.use("/api/users",signOutRouter)
+
+app.all('*',async (req,res,next)=>{
+  next( new NotFoundError() ) ;
+})
 
 app.use(errorHandler) ;
 

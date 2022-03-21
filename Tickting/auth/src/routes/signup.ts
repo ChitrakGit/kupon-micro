@@ -1,6 +1,9 @@
 import express,{Request,Response} from 'express';
 import {body, validationResult} from 'express-validator';
 
+import {RequiredValidatorError} from '../errors/request-validation-errors';
+import {DatabaseConnectionError} from '../errors/database-connection-errors';
+
 const router = express.Router();
 
 
@@ -19,12 +22,16 @@ router.post('/signUp',validation,(req:Request, res:Response) =>{
     const errors = validationResult(req);
     // if(!errors.isEmpty()) return res.send({text:"unsuccessful",status:400,result:errors.array() });
     if(!errors.isEmpty()) {
-        const error:Error = new Error('Invalid email or password') ;
-        // error.reasons = errors.array();
-        throw error
+        // const error:Error = new Error('Invalid email or password') ;
+        // // error.reasons = errors.array();
+        // throw error
+
+        throw new RequiredValidatorError(errors.array() )
     }
     const { email, password } = req.body;
     // if(!email || typeo1f email !== 'string') return res.send({text:"unsuccessful",status:400,result:"wrong email"});
+
+    // throw new DatabaseConnectionError() ;
 
     return res.send({text:"successful",status:200})
 });
