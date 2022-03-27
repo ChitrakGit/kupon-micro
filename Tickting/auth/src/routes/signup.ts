@@ -18,7 +18,7 @@ const validation = [
         .withMessage("password should be length of 4 to 20")
 ];
 
-router.post('/signUp',validation,(req:Request, res:Response) =>{
+router.post('/signUp',validation,async(req:Request, res:Response) =>{
     const errors = validationResult(req);
     // if(!errors.isEmpty()) return res.send({text:"unsuccessful",status:400,result:errors.array() });
     if(!errors.isEmpty()) {
